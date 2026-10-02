@@ -1,19 +1,29 @@
 # Auto Market Analyzer
 
-Prosty MVP do analizy ofert samochodów.
+MVP narzędzia do obserwowania rynku samochodów, wykrywania ofert poniżej mediany i budowania historii skanów.
 
-## Co już działa
-- formularz kryteriów,
-- skanowanie źródła testowego,
-- mediana ceny,
-- wykrywanie ofert >=12% poniżej mediany,
-- responsywny panel.
+## Co działa
+- kryteria auta,
+- testowy provider ofert,
+- mediana ceny i wykrywanie okazji,
+- zapis skanów do Supabase,
+- zapis automatycznych wyszukiwań,
+- historia skanów,
+- endpoint cron `/api/cron/scan`,
+- Vercel Cron raz dziennie o 06:00 UTC.
 
-## Następny krok
-Podmienić `lib/providers/mock.js` na legalne źródło danych (oficjalne API / dozwolony feed / własny importer), dodać Supabase i historię snapshotów ofert.
+## Supabase
+Uruchom `supabase/schema.sql` w SQL Editor, a następnie dodaj w Vercel Environment Variables:
 
-## Start
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `CRON_SECRET` (opcjonalne lokalnie, zalecane na produkcji)
+
+## Start lokalny
 ```bash
 npm install
 npm run dev
 ```
+
+## Ważne
+`lib/providers/mock.js` jest na razie źródłem testowym. Następny etap to legalne źródło rzeczywistych ofert (API/feed/import), bez obchodzenia zabezpieczeń OLX/OTOMOTO.
